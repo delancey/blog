@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Everything They Wrote</h1>
+
+
+<div class="row">
+<% @posts.each do |post| %>
+
+<div class="col-md-6">
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h4><%= link_to post.title, post %></h4>
+    </div>
+
+    <div class="panel-body">
+      <p> <%= link_to post.user.username, user_path(post.user_id) %></p>
+      <p><small> <em> <%= time_ago_in_words(post.created_at) %> ago </em> </small></p>
+      <p>  <%= post.post_entry[0..250] %>...<%= link_to "READ MORE", post %> </p>
+    </div>
+
+    <div class="panel-footer">
+      <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-warning' %>
+      <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-info' %>
+    </div>
+  </div>
+</div>
+<% end %>
+</div>
+
+<br>
+
+<%= link_to 'New Post', new_post_path, class: 'btn btn-info' %>
